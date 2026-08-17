@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@remotion/cli": "^4.0.496",
+    "@remotion/media-utils": "^4.0.496",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "remotion": "^4.0.496"
+  }
+}

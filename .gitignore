@@ -1,0 +1,10 @@
+node_modules/
+out/
+.DS_Store
+.agents/
+.claude/
+.netlify/
+public/input.mov
+src/input.json
+src/input.mov
+src/captions.srt
