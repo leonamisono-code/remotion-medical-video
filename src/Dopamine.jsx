@@ -38,18 +38,18 @@ const Slide = ({ f, from, to, children }) => {
 
 // ─── Audio Duration Constants ─────────────────────────────────────────────────
 const AUDIO = {
-  s1: 597,
-  s2: 802,
-  s3: 1261,
-  s4: 856,
-  s5: 913,
-  s6: 893,
-  s7: 876,
+  s1: 657,
+  s2: 1083,
+  s3: 1240,
+  s4: 1064,
+  s5: 1215,
+  s6: 1226,
+  s7: 932,
 };
 const BUF = 20;
 
 // ─── Scene Boundaries ────────────────────────────────────────────────────────
-const OP_END = 270;
+const OP_END = 0;
 const S1_START = OP_END;
 const S2_START = S1_START + AUDIO.s1 + BUF;
 const S3_START = S2_START + AUDIO.s2 + BUF;
@@ -196,10 +196,8 @@ export const Opening = ({ f, title, subtitle, tags = [] }) => {
 
   return (
     <AbsoluteFill style={{ opacity: masterOp }}>
-
       {/* ── Dark base ── */}
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(140deg, #07070f 0%, #0e0e1e 55%, #060610 100%)' }} />
-
       {/* ── Phase 1: Hook question ── */}
       <div style={{
         position: 'absolute', inset: 0,
@@ -220,7 +218,6 @@ export const Opening = ({ f, title, subtitle, tags = [] }) => {
           なぜ、<br />頑張れないのか
         </div>
       </div>
-
       {/* ── Phase 2: Brain image ── */}
       <div style={{ position: 'absolute', inset: 0, opacity: brainOp }}>
         <div style={{
@@ -238,7 +235,7 @@ export const Opening = ({ f, title, subtitle, tags = [] }) => {
               filter: 'hue-rotate(190deg) saturate(1.8) brightness(0.9)',
               mixBlendMode: 'screen',
             }}
-          />
+            from={-1} />
         </div>
 
         {/* Gold rings + overlays */}
@@ -293,7 +290,6 @@ export const Opening = ({ f, title, subtitle, tags = [] }) => {
             fill="rgba(245,180,40,0.40)">DOPAMINE</text>
         </svg>
       </div>
-
       {/* ── Phase 3: Tags ── */}
       <div style={{
         position: 'absolute', top: 72, left: 80,
@@ -311,7 +307,6 @@ export const Opening = ({ f, title, subtitle, tags = [] }) => {
           }}>{tag}</div>
         ))}
       </div>
-
       {/* ── Phase 3: Title block ── */}
       <div style={{
         position: 'absolute', left: 80, top: 0, bottom: 0, width: 1020,
@@ -342,7 +337,6 @@ export const Opening = ({ f, title, subtitle, tags = [] }) => {
           fontSize: 26, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.05em',
         }}>{subtitle}</div>
       </div>
-
       {/* Bottom right watermark */}
       <div style={{
         position: 'absolute', bottom: 60, right: 80,
@@ -350,7 +344,6 @@ export const Opening = ({ f, title, subtitle, tags = [] }) => {
         fontWeight: 700, letterSpacing: '0.3em',
         color: 'rgba(255,255,255,0.22)', opacity: subOp,
       }}>SCIENCE NOTE</div>
-
     </AbsoluteFill>
   );
 };
@@ -525,13 +518,12 @@ const Scene1 = ({ f, duration }) => {
       </Slide>
 
       <Captions f={f} duration={AUDIO.s1} lines={[
-        { text: 'やる気が続かない',                                  at: 5,   hi: 'やる気',    hiColor: '#e53935' },
-        { text: '頑張ろうとしても、すぐに別のことが気になる',          at: 68  },
-        { text: '意志の弱さでしょうか？',                            at: 156, hi: '意志の弱さ', hiColor: '#e53935' },
-        { text: '現代の環境そのものが\n脳に何かをしているのでは？',    at: 255 },
-        { text: '昔の人と今の私たちの間で',                          at: 397 },
-        { text: '一体、何が変わったのか？',                          at: 468, hi: '何が変わったのか', hiColor: '#2563eb' },
-        { text: 'カギは「ドーパミン」にあるかもしれない',              at: 535, hi: 'ドーパミン', hiColor: '#2563eb' },
+        { text: 'スマホを置こうとした。\nでも気づいたら1時間が過ぎていた。', at: 5 },
+        { text: '「今日こそやる」と思ったのに\n気づけばXを開いている',       at: 155 },
+        { text: 'これって、意志が弱いからでしょうか？',                      at: 286, hi: '意志が弱い', hiColor: '#e53935' },
+        { text: '実は、そうではないかもしれません',                          at: 359 },
+        { text: '原因は、脳の中で起きているある変化にあります',              at: 438 },
+        { text: 'カギは「ドーパミン」という神経伝達物質です',                at: 570, hi: 'ドーパミン', hiColor: '#2563eb' },
       ]} />
       <Audio src={staticFile('audio/dopamine/s1_hook.wav')} />
     </AbsoluteFill>
@@ -628,15 +620,14 @@ const Scene2 = ({ f, duration }) => {
       </Slide>
 
       <Captions f={f} duration={AUDIO.s2} lines={[
-        { text: 'ドーパミン＝「快楽ホルモン」',                       at: 5   },
-        { text: 'でも、それは正確ではありません',                     at: 120, hi: '正確ではありません', hiColor: '#e53935' },
-        { text: 'シュルツ博士（2017年ノーベル賞）の研究',             at: 272 },
-        { text: 'ドーパミンは「報酬そのもの」ではなく',               at: 339 },
-        { text: '「報酬を予測したとき」に分泌される',                 at: 412, hi: '予測したとき', hiColor: '#2563eb' },
-        { text: '本質は「やる気」のホルモン',                         at: 567, hi: 'やる気',      hiColor: '#2563eb' },
-        { text: 'サポルスキー教授（スタンフォード）',                  at: 719 },
-        { text: '「もらう直前」の方がドーパミンが多く出る',           at: 870, hi: 'もらう直前',  hiColor: '#2563eb' },
-        { text: '報酬への「期待」こそがエンジン',                     at: 920 },
+        { text: '神経科学者シュルツのサル実験',                           at: 5   },
+        { text: 'ランプが光る → ジュースが出る',                         at: 150 },
+        { text: '最初：ジュースが出た瞬間にドーパミン分泌',              at: 275 },
+        { text: '繰り返すうち、タイミングが変わった',                    at: 417 },
+        { text: 'ランプが光った瞬間に分泌されるようになった',            at: 535, hi: 'ランプが光った瞬間', hiColor: '#2563eb' },
+        { text: 'ドーパミンは「快楽」ではなく「予測」に反応する',       at: 696, hi: '予測', hiColor: '#2563eb' },
+        { text: '本質は「やる気・動機づけ」のホルモン',                  at: 866, hi: 'やる気', hiColor: '#2563eb' },
+        { text: 'これがすべての出発点です',                              at: 975 },
       ]} />
       <Audio src={staticFile('audio/dopamine/s2_what.wav')} />
     </AbsoluteFill>
@@ -759,17 +750,14 @@ const Scene3 = ({ f, duration }) => {
       </Slide>
 
       <Captions f={f} duration={AUDIO.s3} lines={[
-        { text: '農耕が始まる以前の生活を想像してみてください',         at: 5   },
-        { text: '食料を得るには、動物の足跡を何時間も追う',             at: 111 },
-        { text: '川で何度も空振りを繰り返し',                          at: 227 },
-        { text: 'ようやく獲物にありつける',                             at: 315, hi: 'ようやく', hiColor: '#2563eb' },
-        { text: '報酬が来るまでの時間が長く、道のりは不確か',           at: 370 },
-        { text: '「まだか…まだか」という時間こそが',                   at: 460, hi: 'まだか',   hiColor: '#2563eb' },
-        { text: 'ドーパミンを持続的に分泌させていた',                   at: 552 },
-        { text: 'バリッジ教授（ミシガン大）の指摘',                     at: 669 },
-        { text: 'wanting（欲しがる）≠ liking（満足する）',             at: 740, hi: 'wanting', hiColor: '#2563eb' },
-        { text: '昔の生活では、wantingの時間が長かった',                at: 928 },
-        { text: 'つまりドーパミンが長く機能し続けていた',               at: 1064 },
+        { text: '人類の歴史の99%は農耕以前',                            at: 5   },
+        { text: '狩猟採集民：獲物1頭に平均3〜5日',                      at: 150, hi: '3〜5日', hiColor: '#e53935' },
+        { text: '足跡を読み、川を渡り、何度も空振り',                   at: 342 },
+        { text: '「もうすぐ獲れる」という期待が何日も続く',             at: 483, hi: 'もうすぐ', hiColor: '#2563eb' },
+        { text: 'この長い待機時間がドーパミンを持続させた',             at: 604 },
+        { text: 'バリッジ教授（ミシガン大）の「wanting」理論',          at: 763 },
+        { text: '欲しがる状態が長いほど、人は動き続けられる',           at: 922, hi: '欲しがる状態', hiColor: '#2563eb' },
+        { text: '昔の生活はドーパミンのトレーニングだった',             at: 1089 },
       ]} />
       <Audio src={staticFile('audio/dopamine/s3_past.wav')} />
     </AbsoluteFill>
@@ -887,16 +875,14 @@ const Scene4 = ({ f, duration }) => {
       </Slide>
 
       <Captions f={f} duration={AUDIO.s4} lines={[
-        { text: 'では、現代はどうでしょうか',                           at: 5   },
-        { text: 'お腹が空いたら → 30分で届く',                        at: 70,  hi: '30分で届く',     hiColor: '#e53935' },
-        { text: '退屈なら → 無限スクロール',                           at: 160, hi: '無限スクロール', hiColor: '#e53935' },
-        { text: '知りたいことは → 3秒で答えが出る',                    at: 240, hi: '3秒で',          hiColor: '#e53935' },
-        { text: 'あらゆる欲求が、ほぼ即座に満たされる',                 at: 321 },
-        { text: 'レンブケ博士（スタンフォード精神科）',                  at: 420 },
-        { text: '「過剰刺激」が続くと',                                 at: 510, hi: '過剰刺激',       hiColor: '#e53935' },
-        { text: '脳のドーパミン系の「閾値」が上がる',                   at: 590, hi: '閾値',           hiColor: '#e53935' },
-        { text: 'より強い刺激がないと、やる気が出なくなる',             at: 706 },
-        { text: '同じ量のコーヒーでは眠気が覚めなくなる',              at: 810 },
+        { text: 'Uber Eats：注文から食事まで平均28分',                  at: 5,   hi: '28分', hiColor: '#e53935' },
+        { text: 'Google・ChatGPT：どんな疑問も3秒で解決',              at: 149, hi: '3秒', hiColor: '#e53935' },
+        { text: 'TikTok：0.5秒ごとに新しい刺激',                       at: 305, hi: '0.5秒', hiColor: '#e53935' },
+        { text: '脳は、ほぼ待たずに報酬を受け取り続けている',           at: 488 },
+        { text: 'レンブケ博士（スタンフォード）',                        at: 589 },
+        { text: '「快楽と苦痛のバランス崩壊」',                         at: 679, hi: 'バランス崩壊', hiColor: '#e53935' },
+        { text: '過剰刺激 → ドーパミン受容体の感度低下',               at: 800, hi: '感度低下', hiColor: '#e53935' },
+        { text: '同じ刺激では満足できなくなる',                         at: 954 },
       ]} />
       <Audio src={staticFile('audio/dopamine/s4_now.wav')} />
     </AbsoluteFill>
@@ -1020,14 +1006,14 @@ const Scene5 = ({ f, duration }) => {
       </Slide>
 
       <Captions f={f} duration={AUDIO.s5} lines={[
-        { text: 'その中でも、SNSは構造的に特別',                       at: 15  },
-        { text: 'スキナーが発見した「可変報酬スケジュール」',           at: 152, hi: '可変報酬スケジュール', hiColor: '#2563eb' },
-        { text: '「毎回もらえる」より「もらえるかもしれない」',         at: 321 },
-        { text: '不規則なパターンの方が、行動が強化される',             at: 417, hi: '行動が強化される',    hiColor: '#e53935' },
-        { text: 'スロットマシンがやめられないのも、これが理由',         at: 508, hi: 'スロットマシン',      hiColor: '#e53935' },
-        { text: 'SNSの「いいね」もまったく同じ構造',                   at: 624 },
-        { text: '来るときもあれば、突然たくさん来ることもある',         at: 759 },
-        { text: 'この予測不能性が、脳を何度も画面に向かわせる',        at: 814, hi: '予測不能性',          hiColor: '#e53935' },
+        { text: 'SNSは、脳にとって別格の存在',                          at: 5   },
+        { text: 'スキナーの実験：不規則な報酬のほうが行動が強化される', at: 125, hi: '不規則な報酬', hiColor: '#e53935' },
+        { text: '「可変報酬スケジュール」',                              at: 431, hi: '可変報酬スケジュール', hiColor: '#2563eb' },
+        { text: 'スロットマシン：勝率3割でもやめられない理由',          at: 514, hi: 'スロットマシン', hiColor: '#e53935' },
+        { text: '「いいね」も同じ構造',                                  at: 692 },
+        { text: '来るときもある、0のときもある',                         at: 800 },
+        { text: 'この予測不能性が、脳を画面に向かわせる',               at: 891, hi: '予測不能性', hiColor: '#e53935' },
+        { text: '「スマホはポケットに入ったスロットマシンだ」\n— トリスタン・ハリス（元Google倫理担当）', at: 1018 },
       ]} />
       <Audio src={staticFile('audio/dopamine/s5_phone.wav')} />
     </AbsoluteFill>
@@ -1135,15 +1121,14 @@ const Scene6 = ({ f, duration }) => {
       </Slide>
 
       <Captions f={f} duration={AUDIO.s6} lines={[
-        { text: 'バリッジ教授の言葉を借りれば',                         at: 5   },
-        { text: 'wanting（欲しがる）は高まっているのに',                at: 72,  hi: 'wanting', hiColor: '#2563eb' },
-        { text: 'liking（実際の満足感）は伴わなくなっている',           at: 129, hi: 'liking',  hiColor: '#e53935' },
-        { text: '何かを手に入れても、すぐ次が欲しくなる',               at: 270 },
-        { text: 'やり遂げても、達成感が薄い',                           at: 375, hi: '達成感が薄い', hiColor: '#e53935' },
-        { text: '普通の日常が、どこか虚ろに感じられる',                 at: 434 },
-        { text: 'これは性格や根性の問題ではない',                       at: 532 },
-        { text: '長期の過剰刺激によって',                               at: 630 },
-        { text: '脳のドーパミン系が変化している可能性がある',           at: 679 },
+        { text: 'この状態が長期化するとどうなるか',                                    at: 5   },
+        { text: 'うつ病の有病率：2000年→2020年で約3倍（WHO）',                        at: 98,  hi: '約3倍', hiColor: '#e53935' },
+        { text: 'スマートフォン普及の時期とほぼ重なる',                                at: 366 },
+        { text: '達成しても、すぐ次が欲しくなる',                                      at: 478 },
+        { text: '楽しいはずの休日が、なぜかぼんやりしている',                          at: 575 },
+        { text: 'これは怠けではありません',                                            at: 699 },
+        { text: '「wanting↑ なのに liking が伴わない」\n— バリッジ教授',              at: 756, hi: 'wanting↑', hiColor: '#2563eb' },
+        { text: '欲しがる回路は動いているのに\n満足する回路が機能しなくなっている',    at: 992 },
       ]} />
       <Audio src={staticFile('audio/dopamine/s6_effect.wav')} />
     </AbsoluteFill>
@@ -1236,16 +1221,14 @@ const Scene7 = ({ f, duration }) => {
       </Slide>
 
       <Captions f={f} duration={AUDIO.s7} lines={[
-        { text: 'では、どうすればいいのでしょうか',                     at: 5   },
-        { text: '答えは単純ですが、簡単ではありません',                 at: 80  },
-        { text: '意図的に「遅らせる」こと',                             at: 174, hi: '遅らせる',    hiColor: '#2563eb' },
-        { text: 'すぐ手に入るものを、少し待つ',                        at: 233 },
-        { text: 'スマホを置く時間をつくる',                             at: 300, hi: 'スマホを置く', hiColor: '#2563eb' },
-        { text: '退屈をすぐに埋めない',                                 at: 356, hi: '退屈',         hiColor: '#e53935' },
-        { text: '報酬が来るまでの「間」を生活に戻す',                  at: 411 },
-        { text: 'ドーパミンは、目標に向かう道中、私たちを動かす',       at: 536 },
-        { text: '昔の人が持っていたその感覚を',                         at: 732 },
-        { text: '現代の私たちも取り戻せる余地は、あるはずです',         at: 820 },
+        { text: 'ペンシルバニア大学の研究（2018年）',                         at: 5   },
+        { text: 'SNS使用を1日10分に制限',                                     at: 139, hi: '10分', hiColor: '#2563eb' },
+        { text: '4週間後：孤独感・抑うつ感が大きく低下',                      at: 264, hi: '大きく低下', hiColor: '#2563eb' },
+        { text: '答えは「やめる」ではなく「間をつくる」こと',                  at: 402, hi: '間をつくる', hiColor: '#2563eb' },
+        { text: '退屈でもすぐにスマホを開かない',                             at: 514 },
+        { text: 'その5分間の「まだか」が\nドーパミンを再び機能させる',         at: 591, hi: 'まだか', hiColor: '#2563eb' },
+        { text: '「待つ力」を少しずつ取り戻す',                               at: 735, hi: '待つ力', hiColor: '#2563eb' },
+        { text: 'それが、やる気が続く脳への最初の一歩',                       at: 824 },
       ]} />
       <Audio src={staticFile('audio/dopamine/s7_solution.wav')} />
     </AbsoluteFill>
@@ -1259,15 +1242,7 @@ export const DopamineComposition = () => {
   return (
     <AbsoluteFill style={{ background: C.bg }}>
       <Audio src={staticFile('audio/dopamine/bgm.mp3')} volume={0.12} />
-      <Sequence from={0} durationInFrames={OP_END}>
-        <Opening
-          f={frame}
-          title={"昔と今の\n生活習慣の違いは\nドーパミンが\n原因だった？"}
-          subtitle={"なぜ現代人は努力が続かないのか"}
-          tags={["ドーパミン", "脳科学", "現代生活", "習慣"]}
-        />
-      </Sequence>
-      <Sequence from={S1_START} durationInFrames={S2_START - S1_START}>
+<Sequence from={S1_START} durationInFrames={S2_START - S1_START}>
         <Scene1 f={frame - S1_START} duration={AUDIO.s1 + BUF} />
       </Sequence>
       <Sequence from={S2_START} durationInFrames={S3_START - S2_START}>
